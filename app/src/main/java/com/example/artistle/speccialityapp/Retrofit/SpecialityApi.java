@@ -9,5 +9,5 @@ import retrofit2.http.GET;
 
 public interface SpecialityApi {
     @GET("testTask.json")
-    Observable<List<SpecialityModel>> getApi();
+    Observable<List<SpecialityModel.Response>> getApi();
 }

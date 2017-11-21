@@ -3,6 +3,7 @@ package com.example.artistle.speccialityapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.artistle.speccialityapp.Adapter.RecyclerAdapter;
@@ -24,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     public static final String BASE_URL = "http://gitlab.65apps.com/65gb/static/raw/master/";
     private CompositeDisposable compositeDisposable;
-    private ArrayList<SpecialityModel> listModels;
+    private ArrayList<SpecialityModel.Response> listModels;
     private RecyclerAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listModels = new ArrayList<SpecialityModel>();
+        listModels = new ArrayList<SpecialityModel.Response>();
         compositeDisposable = new CompositeDisposable();
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         //adapter = new RecyclerAdapter();
@@ -53,20 +54,23 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(this::handleResponse,this::handleError));
     }
 
+
     private void handleError(Throwable throwable) {
-        Toast.makeText(this, "error 404", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "error 404" + throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        Log.d("TAG", throwable.getLocalizedMessage());
     }
 
-    private void handleResponse(List<SpecialityModel> userList) {
-        listModels = new ArrayList<SpecialityModel>();
+
+    private void handleResponse(List<SpecialityModel.Response> userList) {
+        listModels = new ArrayList<SpecialityModel.Response>();
         adapter = new RecyclerAdapter(listModels);
         recyclerView.setAdapter(adapter);
         listModels.addAll(userList);
 
-        Collections.sort(listModels, new Comparator<SpecialityModel>() {
+        Collections.sort(listModels, new Comparator<SpecialityModel.Response>() {
             @Override
-            public int compare(SpecialityModel o1, SpecialityModel o2) {
-                return o1.getLName().compareTo(o2.getLName());
+            public int compare(SpecialityModel.Response o1, SpecialityModel.Response o2) {
+                return o1.fName.compareTo(o2.lName);
             }
         });
     }

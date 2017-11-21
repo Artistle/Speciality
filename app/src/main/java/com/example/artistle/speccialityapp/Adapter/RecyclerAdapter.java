@@ -13,9 +13,12 @@ import com.example.artistle.speccialityapp.R;
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    private ArrayList<SpecialityModel> listModel;
+    SpecialityModel.Example er;
+    //private ArrayList<SpecialityModel.Response> listModel;
+    private ArrayList<SpecialityModel.Response> listModel;
 
-    public RecyclerAdapter(ArrayList<SpecialityModel> listModels) {
+    public RecyclerAdapter(ArrayList<SpecialityModel.Response> listModels) {
+        //this.listModel = listModels;
     }
 
     @Override
@@ -26,9 +29,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        SpecialityModel user = listModel.get(position);
-        holder.lname.setText(user.getLName());
-        holder.fname.setText(user.getFName());
+        //er.response = new ArrayList<SpecialityModel.Response>();
+        //SpecialityModel.Response user = listModel.get(position);
+        SpecialityModel.Response user = listModel.get(position);
+        holder.lname.setText(user.getfName());
+        holder.fname.setText(user.getlName());
 
         //String url_avatar = user.getAvatrUrl();
 
