@@ -12,6 +12,7 @@ import com.example.artistle.speccialityapp.Retrofit.SpecialityApi;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -61,17 +62,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void handleResponse(List<SpecialityModel.Response> userList) {
+    private void handleResponse(SpecialityModel.Response userList) {
         listModels = new ArrayList<SpecialityModel.Response>();
         adapter = new RecyclerAdapter(listModels);
         recyclerView.setAdapter(adapter);
         listModels.addAll(userList);
 
-        Collections.sort(listModels, new Comparator<SpecialityModel.Response>() {
+        Toast.makeText(this, "БЛЯ,ОНО РАБОТАЕТ", Toast.LENGTH_SHORT).show();
+
+        /*Collections.sort(listModels, new Comparator<SpecialityModel>() {
             @Override
             public int compare(SpecialityModel.Response o1, SpecialityModel.Response o2) {
                 return o1.fName.compareTo(o2.lName);
             }
-        });
+        }); */
     }
 }

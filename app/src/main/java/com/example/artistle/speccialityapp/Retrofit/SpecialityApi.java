@@ -8,6 +8,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 public interface SpecialityApi {
+    //SpecialityModel.Response er = new SpecialityModel.Response;
     @GET("testTask.json")
-    Observable<List<SpecialityModel.Response>> getApi();
+    Observable <SpecialityModel.Response> getApi();
 }
